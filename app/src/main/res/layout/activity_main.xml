@@ -6,9 +6,15 @@
              android:layout_height="match_parent"
              tools:context=".MainActivity">
 
-    <com.taleb.cps.CircularProgressStepper android:layout_width="300dp" android:layout_height="350dp"
+    <com.taleb.cps.CircularProgressStepper android:layout_width="wrap_content" android:layout_height="wrap_content"
                                            android:layout_gravity="center"
-                                           android:background="#873"
-                                           android:rotation="-90"/>
+                                           android:rotation="-90"
+                                           app:cps_numOfSteps="4"
+                                           app:cps_currentStep="3"
+                                           app:cps_stepsSize="28dp"
+                                           app:cps_foregroundColor="@android:color/darker_gray"
+                                           app:cps_progressColor="@android:color/holo_blue_bright"
+                                           app:cps_progressStrokeOffset="+5dp"
+                                           android:padding="10dp"/>
 
 </FrameLayout>

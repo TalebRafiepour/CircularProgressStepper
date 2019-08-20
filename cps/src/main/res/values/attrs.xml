@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="CircularProgressStepper">
+        <attr name="cps_numOfSteps" format="integer|reference"/>
+        <attr name="cps_currentStep" format="integer|reference"/>
+        <attr name="cps_stepsSize" format="dimension|reference"/>
+        <attr name="cps_foregroundColor" format="color|reference"/>
+        <attr name="cps_progressColor" format="color|reference"/>
+        <attr name="cps_progressStrokeOffset" format="dimension|reference"/>
+    </declare-styleable>
+</resources>
