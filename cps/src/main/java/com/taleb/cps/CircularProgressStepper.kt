@@ -22,6 +22,7 @@ class CircularProgressStepper : View {
     private var numOfSteps = 6
     private var currentStep = 1
     private var progressStrokeOffset = (2*resources.displayMetrics.density).toInt()
+    private var stepsDrawableSrc:IntArray? = null
 
 
     constructor(context: Context) : this(context, null)
@@ -44,6 +45,8 @@ class CircularProgressStepper : View {
                 foregroundColor = typedArray.getColor(R.styleable.CircularProgressStepper_cps_foregroundColor,foregroundColor)
                 progressColor = typedArray.getColor(R.styleable.CircularProgressStepper_cps_progressColor,progressColor)
                 progressStrokeOffset = typedArray.getDimensionPixelOffset(R.styleable.CircularProgressStepper_cps_progressStrokeOffset,progressStrokeOffset)
+                val stepsDrawableResId = typedArray.getResourceId(R.styleable.CircularProgressStepper_cps_stepsDrawableSrc,-1)
+                stepsDrawableSrc = typedArray.resources.getIntArray(stepsDrawableResId)
             } catch (e: Exception) {
                 e.printStackTrace()
             } finally {

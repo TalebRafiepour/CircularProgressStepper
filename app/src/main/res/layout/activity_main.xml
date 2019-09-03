@@ -14,7 +14,7 @@
                                            app:cps_stepsSize="28dp"
                                            app:cps_foregroundColor="@android:color/darker_gray"
                                            app:cps_progressColor="@android:color/holo_blue_bright"
-                                           app:cps_progressStrokeOffset="+5dp"
+                                           app:cps_progressStrokeOffset="40dp"
                                            android:padding="10dp"/>
 
 </FrameLayout>

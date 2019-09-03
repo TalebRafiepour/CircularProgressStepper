@@ -7,5 +7,6 @@
         <attr name="cps_foregroundColor" format="color|reference"/>
         <attr name="cps_progressColor" format="color|reference"/>
         <attr name="cps_progressStrokeOffset" format="dimension|reference"/>
+        <attr name="cps_stepsDrawableSrc" format="reference"/>
     </declare-styleable>
 </resources>
