@@ -2,12 +2,10 @@ package com.taleb.cps
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.graphics.Canvas
-import android.graphics.Color
-import android.graphics.Paint
-import android.graphics.RectF
+import android.graphics.*
 import android.util.AttributeSet
 import android.view.View
+import androidx.core.graphics.toRect
 import kotlin.math.max
 import kotlin.math.min
 
@@ -20,9 +18,9 @@ class CircularProgressStepper : View {
     private var currentProgress = 0f
     private var endProgress = 360f
     private var numOfSteps = 6
+    private var stepsImgSrc = emptyArray<Int>()
     private var currentStep = 1
     private var progressStrokeOffset = (2*resources.displayMetrics.density).toInt()
-    private var stepsDrawableSrc:IntArray? = null
 
 
     constructor(context: Context) : this(context, null)
@@ -45,8 +43,6 @@ class CircularProgressStepper : View {
                 foregroundColor = typedArray.getColor(R.styleable.CircularProgressStepper_cps_foregroundColor,foregroundColor)
                 progressColor = typedArray.getColor(R.styleable.CircularProgressStepper_cps_progressColor,progressColor)
                 progressStrokeOffset = typedArray.getDimensionPixelOffset(R.styleable.CircularProgressStepper_cps_progressStrokeOffset,progressStrokeOffset)
-                val stepsDrawableResId = typedArray.getResourceId(R.styleable.CircularProgressStepper_cps_stepsDrawableSrc,-1)
-                stepsDrawableSrc = typedArray.resources.getIntArray(stepsDrawableResId)
             } catch (e: Exception) {
                 e.printStackTrace()
             } finally {
@@ -69,8 +65,8 @@ class CircularProgressStepper : View {
     }
 
     fun setCurrentStep(currentStep: Int) {
-        if (currentStep >= numOfSteps) {
-            throw java.lang.Exception("current step must be smaller than numOfSteps($numOfSteps)")
+        if (currentStep > numOfSteps) {
+            throw java.lang.Exception("current step must be equal or smaller than numOfSteps($numOfSteps)")
         }
         this.currentStep = currentStep
         if (currentStep == 0) {
@@ -99,6 +95,12 @@ class CircularProgressStepper : View {
             currentStep -= 1
             setCurrentStep(currentStep)
         }
+    }
+
+    fun setStepsImgSrc(stepsImgSrc: Array<Int>) {
+        this.stepsImgSrc = stepsImgSrc
+        this.numOfSteps = stepsImgSrc.size
+        setCurrentStep(currentStep)
     }
 
 
@@ -138,8 +140,15 @@ class CircularProgressStepper : View {
         stepPaint.color = foregroundColor
         stepPaint.isAntiAlias = true
 
+        val stepImgPaint = Paint()
+        stepImgPaint.style = Paint.Style.FILL
+        val filter = PorterDuffColorFilter(progressColor, PorterDuff.Mode.SRC_IN)
+        stepImgPaint.colorFilter = filter
+        stepImgPaint.isAntiAlias = true
+
+
         val stepDegree = 360 / numOfSteps
-        for (i in 0..numOfSteps) {
+        for (i in 0 until numOfSteps) {
             val currentDegree: Float = (stepDegree * i).toFloat()
             val theta = (currentDegree * Math.PI) / 180
             val centerX = width / 2 - stepsSize / 2
@@ -148,12 +157,20 @@ class CircularProgressStepper : View {
             val top = (circleRadius * Math.sin(theta) + centerY).toFloat()
             if (currentDegree <= currentProgress) {
                 stepPaint.color = progressColor
+                val filter1 = PorterDuffColorFilter(foregroundColor, PorterDuff.Mode.SRC_IN)
+                stepImgPaint.colorFilter = filter1
             } else {
                 stepPaint.color = foregroundColor
+                val filter1 = PorterDuffColorFilter(progressColor, PorterDuff.Mode.SRC_IN)
+                stepImgPaint.colorFilter = filter1
             }
             val rectF = RectF(left, top, left + stepsSize, top + stepsSize)
-
             canvas.drawOval(rectF, stepPaint)
+            //
+            if (stepsImgSrc.size > i) {
+                val bitmap = BitmapFactory.decodeResource(resources,stepsImgSrc[i])
+                canvas.drawBitmap(bitmap,null,rectF,stepImgPaint)
+            }
         }
 
         if (currentProgress < endProgress) {
