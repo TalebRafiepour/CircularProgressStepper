@@ -7,43 +7,22 @@
               android:orientation="vertical"
               tools:context=".MainActivity">
     <!--android:rotation="-90"-->
-    <com.taleb.cps.CircularProgressStepper android:layout_width="200dp" android:layout_height="200dp"
+    <com.taleb.cps.CircularProgressStepper android:layout_width="300dp" android:layout_height="300dp"
                                            android:layout_gravity="center|top"
                                            android:id="@+id/cpsStepper"
                                            app:cps_numOfSteps="5"
                                            app:cps_currentStep="4"
+                                           app:cps_stepsSize="38dp"
                                            app:cps_foregroundColor="@android:color/darker_gray"
                                            app:cps_progressColor="@android:color/holo_blue_bright"
                                            app:cps_progressStrokeOffset="5dp"
                                            android:padding="10dp"/>
     <ScrollView android:layout_width="match_parent" android:layout_height="0dp"
                 android:layout_weight="1">
+
         <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
                       android:orientation="vertical"
                       android:padding="@dimen/padding_normal">
-            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
-                          android:orientation="horizontal"
-                          android:layout_margin="@dimen/small_margin">
-                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                          android:text="@string/number_of_steps"
-                          android:textSize="@dimen/normal_text_size"/>
-            </LinearLayout>
-
-            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
-                          android:orientation="horizontal"
-                          android:layout_margin="@dimen/small_margin">
-                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                          android:text="Current Step : "
-                          android:textSize="@dimen/normal_text_size"/>
-            </LinearLayout>
-
-            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
-                          android:orientation="horizontal"
-                          android:layout_margin="@dimen/small_margin">
-                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                          android:text="Progress Stroke Offset: "
-                          android:textSize="@dimen/normal_text_size"/>
-            </LinearLayout>
 
             <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
                           android:orientation="horizontal"
@@ -59,6 +38,53 @@
                                  android:textSize="@dimen/normal_text_size"
                                  android:text="without image"/>
                 </RadioGroup>
+            </LinearLayout>
+
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                          android:orientation="horizontal"
+                          android:layout_margin="@dimen/small_margin">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                          android:text="@string/number_of_steps"
+                          android:textSize="@dimen/normal_text_size"/>
+                <nl.dionsegijn.steppertouch.StepperTouch
+                        android:id="@+id/numOfStepStepperTouch"
+                        android:layout_width="100dp"
+                        android:layout_height="28dp"
+                        app:stepperBackgroundColor="@android:color/darker_gray"/>
+            </LinearLayout>
+
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                          android:orientation="horizontal"
+                          android:layout_margin="@dimen/small_margin">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                          android:text="Current Step : "
+                          android:textSize="@dimen/normal_text_size"/>
+                <nl.dionsegijn.steppertouch.StepperTouch
+                        android:id="@+id/currentStepStepperTouch"
+                        android:layout_width="100dp"
+                        android:layout_height="28dp"
+                        app:stepperBackgroundColor="@android:color/darker_gray"/>
+            </LinearLayout>
+
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                          android:orientation="vertical"
+                          android:layout_margin="@dimen/small_margin">
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                              android:orientation="horizontal">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                          android:text="Progress Stroke Offset: "
+                          android:textSize="@dimen/normal_text_size"/>
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                              android:text="5"
+                              android:id="@+id/progressStrokeOffsetTV"
+                              android:textColor="@android:color/black"
+                              android:textSize="@dimen/normal_text_size"/>
+                </LinearLayout>
+                <SeekBar android:layout_width="match_parent"
+                         android:layout_height="wrap_content"
+                         android:id="@+id/progressStrokeOffsetSeekBar"
+                android:min="-40"
+                android:max="40"/>
             </LinearLayout>
 
         </LinearLayout>

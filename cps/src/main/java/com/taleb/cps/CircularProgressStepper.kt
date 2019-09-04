@@ -21,6 +21,11 @@ class CircularProgressStepper : View {
     private var stepsImgSrc = emptyArray<Int>()
     private var currentStep = 1
     private var progressStrokeOffset = (2*resources.displayMetrics.density).toInt()
+    //
+    private val circlePaint = Paint()
+    private val progressPaint = Paint()
+    private val stepPaint = Paint()
+    private val stepImgPaint = Paint()
 
 
     constructor(context: Context) : this(context, null)
@@ -51,8 +56,31 @@ class CircularProgressStepper : View {
             }
         }
 
+        paintsInit()
+
         //todo(add infinite progress)
         //todo(add custom image to steps)
+        //todo(when numOfStep is odd steps not draw correctly -> bug)
+    }
+
+    private fun paintsInit() {
+        circlePaint.style = Paint.Style.STROKE
+        circlePaint.color = foregroundColor
+        circlePaint.isAntiAlias = true
+        //
+        progressPaint.style = Paint.Style.STROKE
+        progressPaint.strokeCap = Paint.Cap.ROUND
+        progressPaint.color = progressColor
+        progressPaint.isAntiAlias = true
+        //
+        stepPaint.style = Paint.Style.FILL
+        stepPaint.color = foregroundColor
+        stepPaint.isAntiAlias = true
+        //
+        stepImgPaint.style = Paint.Style.FILL
+        val filter = PorterDuffColorFilter(progressColor, PorterDuff.Mode.SRC_IN)
+        stepImgPaint.colorFilter = filter
+        stepImgPaint.isAntiAlias = true
     }
 
 
@@ -76,7 +104,20 @@ class CircularProgressStepper : View {
             this.endProgress = stepDegree * currentStep
         }
 
+        /*if (currentProgress >= endProgress){
+            this.currentProgress = endProgress
+        }*/
+
         postInvalidate()
+    }
+
+    fun setNumOfSeps(numOfSteps: Int){
+        this.numOfSteps = numOfSteps
+        setCurrentStep(currentStep)
+    }
+
+    fun getNumOfSteps(): Int{
+        return numOfSteps
     }
 
     fun getCurrentStep(): Int {
@@ -99,8 +140,17 @@ class CircularProgressStepper : View {
 
     fun setStepsImgSrc(stepsImgSrc: Array<Int>) {
         this.stepsImgSrc = stepsImgSrc
-        this.numOfSteps = stepsImgSrc.size
+        setNumOfSeps(stepsImgSrc.size)
         setCurrentStep(currentStep)
+    }
+
+    fun setProgressStrokeOffset(progressStrokeOffset: Int){
+        this.progressStrokeOffset = progressStrokeOffset
+        postInvalidate()
+    }
+
+    fun getProgressStrokeOffset(): Int{
+        return progressStrokeOffset
     }
 
 
@@ -112,20 +162,10 @@ class CircularProgressStepper : View {
         val progressStrokeWidth = circleStrokeWidth-progressStrokeOffset
 
         //draw background layer
-        val circlePaint = Paint()
-        circlePaint.style = Paint.Style.STROKE
-        circlePaint.color = foregroundColor
-        circlePaint.isAntiAlias = true
         circlePaint.strokeWidth = circleStrokeWidth
-
         canvas.drawCircle((width / 2).toFloat(), (height / 2).toFloat(), circleRadius, circlePaint)
 
         //draw progress layer
-        val progressPaint = Paint()
-        progressPaint.style = Paint.Style.STROKE
-        progressPaint.strokeCap = Paint.Cap.ROUND
-        progressPaint.color = progressColor
-        progressPaint.isAntiAlias = true
         progressPaint.strokeWidth = progressStrokeWidth
 
         val rectLeft = (width - circleWidth) / 2
@@ -135,18 +175,6 @@ class CircularProgressStepper : View {
         canvas.drawArc(rectProgress, 0f, currentProgress, false, progressPaint)
 
         //draw step circles
-        val stepPaint = Paint()
-        stepPaint.style = Paint.Style.FILL
-        stepPaint.color = foregroundColor
-        stepPaint.isAntiAlias = true
-
-        val stepImgPaint = Paint()
-        stepImgPaint.style = Paint.Style.FILL
-        val filter = PorterDuffColorFilter(progressColor, PorterDuff.Mode.SRC_IN)
-        stepImgPaint.colorFilter = filter
-        stepImgPaint.isAntiAlias = true
-
-
         val stepDegree = 360 / numOfSteps
         for (i in 0 until numOfSteps) {
             val currentDegree: Float = (stepDegree * i).toFloat()
@@ -175,6 +203,9 @@ class CircularProgressStepper : View {
 
         if (currentProgress < endProgress) {
             currentProgress += 2.0f
+            postInvalidate()
+        }else if (currentProgress > endProgress){
+            currentProgress -= 2.0f
             postInvalidate()
         }
     }
