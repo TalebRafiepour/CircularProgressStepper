@@ -13,8 +13,8 @@
                                            app:cps_numOfSteps="5"
                                            app:cps_currentStep="4"
                                            app:cps_stepsSize="38dp"
-                                           app:cps_foregroundColor="@android:color/darker_gray"
-                                           app:cps_progressColor="@android:color/holo_blue_bright"
+                                           app:cps_foregroundColor="#E4E4E4"
+                                           app:cps_progressColor="#3FE6D1"
                                            app:cps_progressStrokeOffset="5dp"
                                            android:padding="10dp"/>
     <ScrollView android:layout_width="match_parent" android:layout_height="0dp"
@@ -30,14 +30,53 @@
                 <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
                           android:text="Step Type : "
                           android:textSize="@dimen/normal_text_size"/>
-                <RadioGroup android:layout_width="match_parent" android:layout_height="wrap_content">
+                <RadioGroup android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                android:checkedButton="@id/defaultStepperTypeRadio">
                     <RadioButton android:layout_width="wrap_content" android:layout_height="wrap_content"
                                  android:textSize="@dimen/normal_text_size"
                                  android:text="with custom image"/>
                     <RadioButton android:layout_width="wrap_content" android:layout_height="wrap_content"
                                  android:textSize="@dimen/normal_text_size"
-                                 android:text="without image"/>
+                                 android:id="@+id/defaultStepperTypeRadio"
+                                 android:text="default"/>
                 </RadioGroup>
+            </LinearLayout>
+
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                          android:orientation="horizontal"
+                          android:gravity="center|left">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                          android:text="Progress Color: "
+                          android:textSize="@dimen/normal_text_size"/>
+                <TextView android:layout_width="wrap_content" android:layout_height="@dimen/normal_button"
+                          android:text="#7937"
+                          android:gravity="center"
+                          android:id="@+id/progressColorTV"
+                          android:textColor="@android:color/black"
+                          android:textSize="@dimen/normal_text_size"/>
+                <View android:layout_width="@dimen/small_button" android:layout_height="@dimen/small_button"
+                      android:layout_gravity="center"
+                      android:id="@+id/progressColorV"
+                      android:background="#089"/>
+            </LinearLayout>
+
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                          android:orientation="horizontal"
+                          android:gravity="center|left">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                          android:text="Foreground Color: "
+                          android:textSize="@dimen/normal_text_size"/>
+                <TextView android:layout_width="wrap_content" android:layout_height="@dimen/normal_button"
+                          android:text="#7937"
+                          android:gravity="center"
+                          android:id="@+id/foregroundColorTV"
+                          android:textColor="@android:color/black"
+                          android:textSize="@dimen/normal_text_size"/>
+                <View android:layout_width="@dimen/small_button" android:layout_height="@dimen/small_button"
+                           android:id="@+id/foregroundColorV"
+                      android:background="#9873"
+                           android:layout_gravity="center"/>
             </LinearLayout>
 
             <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
@@ -71,9 +110,30 @@
                           android:layout_margin="@dimen/small_margin">
                 <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
                               android:orientation="horizontal">
-                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                          android:text="Progress Stroke Offset: "
-                          android:textSize="@dimen/normal_text_size"/>
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                              android:text="Progress Steps Size: "
+                              android:textSize="@dimen/normal_text_size"/>
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                              android:text="28dp"
+                              android:id="@+id/progressStepSizeTV"
+                              android:textColor="@android:color/black"
+                              android:textSize="@dimen/normal_text_size"/>
+                </LinearLayout>
+                <SeekBar android:layout_width="match_parent"
+                         android:layout_height="wrap_content"
+                         android:id="@+id/progressStepSizeSeekBar"
+                         android:min="0"
+                         android:max="100"/>
+            </LinearLayout>
+
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                          android:orientation="vertical"
+                          android:layout_margin="@dimen/small_margin">
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                              android:orientation="horizontal">
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                              android:text="Progress Stroke Offset: "
+                              android:textSize="@dimen/normal_text_size"/>
                     <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
                               android:text="5"
                               android:id="@+id/progressStrokeOffsetTV"
@@ -83,9 +143,10 @@
                 <SeekBar android:layout_width="match_parent"
                          android:layout_height="wrap_content"
                          android:id="@+id/progressStrokeOffsetSeekBar"
-                android:min="-40"
-                android:max="40"/>
+                         android:min="-40"
+                         android:max="40"/>
             </LinearLayout>
+
 
         </LinearLayout>
     </ScrollView>
