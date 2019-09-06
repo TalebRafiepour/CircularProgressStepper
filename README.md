@@ -4,7 +4,7 @@ Rounded Android Progress Bar For Show Steps Of A Proccess
 <img src="https://github.com/TalebRafiepour/CircularProgressStepper/blob/master/cps-gif.gif" width="300"> 
 
 ## 1.setup 
-Add the JitPack repository to your build file
+Add the JitPack repository to your build file;\n
 Add it in your root build.gradle at the end of repositories:
 
 ```
