@@ -13,13 +13,21 @@ import nl.dionsegijn.steppertouch.OnStepCallback
 
 class MainActivity : AppCompatActivity() {
 
-    private val stepsSrc = arrayOf(R.drawable.ic_camera,R.drawable.ic_folder,R.drawable.ic_camera,R.drawable.ic_camera)
+    private val stepsSrc = arrayOf(R.drawable.ic_one,R.drawable.ic_two,R.drawable.ic_three,
+        R.drawable.ic_four,R.drawable.ic_five)
     private var numOfSteps = 4
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        cpsStepper.setStepsImgSrc(stepsSrc)
+
+        stepperTypeRG.setOnCheckedChangeListener { group, checkedId ->
+            if (checkedId == R.id.defaultStepperTypeRadio){
+                cpsStepper.removeStepsImgSrc()
+            }else {
+                cpsStepper.setStepsImgSrc(stepsSrc)
+            }
+        }
 
         numOfSteps = cpsStepper.getNumOfSteps()
         numOfStepStepperTouch.count = cpsStepper.getNumOfSteps()

@@ -144,6 +144,11 @@ class CircularProgressStepper : View {
         setCurrentStep(currentStep)
     }
 
+    fun removeStepsImgSrc() {
+        this.stepsImgSrc = emptyArray<Int>()
+        postInvalidate()
+    }
+
     fun setProgressStrokeOffset(progressStrokeOffset: Int) {
         this.progressStrokeOffset = progressStrokeOffset
         postInvalidate()

@@ -6,7 +6,6 @@
               android:layout_height="match_parent"
               android:orientation="vertical"
               tools:context=".MainActivity">
-    <!--android:rotation="-90"-->
     <com.taleb.cps.CircularProgressStepper android:layout_width="300dp" android:layout_height="300dp"
                                            android:layout_gravity="center|top"
                                            android:id="@+id/cpsStepper"
@@ -32,6 +31,7 @@
                           android:textSize="@dimen/normal_text_size"/>
                 <RadioGroup android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:id="@+id/stepperTypeRG"
                 android:checkedButton="@id/defaultStepperTypeRadio">
                     <RadioButton android:layout_width="wrap_content" android:layout_height="wrap_content"
                                  android:textSize="@dimen/normal_text_size"
