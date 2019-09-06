@@ -3,7 +3,7 @@ Rounded Android Progress Bar For Show Steps Of A Proccess
 
 <img src="https://github.com/TalebRafiepour/CircularProgressStepper/blob/master/cps-gif.gif" width="300"> 
 
-1.setup 
+## 1.setup 
 
 ```
 allprojects {
@@ -22,7 +22,7 @@ allprojects {
 	}
    
 ```
-2.usage
+## 2.usage
 
 ```
 <com.taleb.cps.CircularProgressStepper android:layout_width="300dp" android:layout_height="300dp"
