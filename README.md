@@ -38,4 +38,11 @@ Add the dependency
                                            app:cps_progressColor="#3FE6D1"
                                            app:cps_progressStrokeOffset="5dp"
                                            android:padding="10dp"/>
-                                           ```
+```
+And you can also add custom image to steps in code: 
+```
+private val stepsSrc = arrayOf(R.drawable.ic_one,R.drawable.ic_two,R.drawable.ic_three,
+        R.drawable.ic_four,R.drawable.ic_five)
+	
+	cpsStepper.setStepsImgSrc(stepsSrc)
+```
